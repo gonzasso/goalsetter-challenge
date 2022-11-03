@@ -18,7 +18,6 @@ public enum BrowserType implements HasCapabilities {
             capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, TEST_PROPERTIES.getPlatformVersion());
             capabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, TEST_PROPERTIES.getAutomationName());
             capabilities.setCapability(MobileCapabilityType.APP, TEST_PROPERTIES.getAppDir());
-//            capabilities.setCapability("app","C:\\\\Users\\\\gonza\\\\Documents\\\\Dev\\\\app-universal-qa.apk");
 
             return capabilities;
         }

@@ -24,25 +24,27 @@ public final class Driver {
 
     private static final ThreadLocal<WebDriver> DRIVERS = new ThreadLocal<>();
 
-    public static void populateDriver(BrowserType browser) {
+    public static void populateDriver(BrowserType browser) throws MalformedURLException {
 
         if (DRIVERS.get() == null) {
 
             DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
             desiredCapabilities.setCapability(MobileCapabilityType.NEW_COMMAND_TIMEOUT, 60);
 
-            AppiumServiceBuilder appiumLocalService = new AppiumServiceBuilder()
-                    .withCapabilities(desiredCapabilities)
-                    .usingAnyFreePort()
-                    .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
-                    .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+//            AppiumServiceBuilder appiumLocalService = new AppiumServiceBuilder()
+//                    .withCapabilities(desiredCapabilities)
+//                    .usingAnyFreePort()
+//                    .withArgument(GeneralServerFlag.SESSION_OVERRIDE)
+//                    .withArgument(GeneralServerFlag.LOG_LEVEL, "error");
+//
+//
+//            AppiumDriverLocalService service = appiumLocalService.build();
+//
+//            service.start();
 
+            URL serverUrl = new URL(TEST_PROPERTIES.getRemoteServerUrl());
 
-            AppiumDriverLocalService service = appiumLocalService.build();
-
-            service.start();
-
-            AndroidDriver<WebElement> driver = new AndroidDriver(service.getUrl(), browser.getCapabilities());
+            AndroidDriver<WebElement> driver = new AndroidDriver(serverUrl, browser.getCapabilities());
             driver.manage().timeouts().implicitlyWait(TEST_PROPERTIES.getImplicitWait(), SECONDS);
 
             DRIVERS.set(driver);
